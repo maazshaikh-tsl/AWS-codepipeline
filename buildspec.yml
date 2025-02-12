@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+  build:
+    commands:
+      - echo "Building the application..."
+      - mkdir -p dist
+      - cp -r * dist/
+  post_build:
+    commands:
+      - echo "Build complete, preparing artifact"
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist
