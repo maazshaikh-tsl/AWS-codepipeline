@@ -1,16 +1,5 @@
 version: 0.0
 os: linux
 files:
-  - source: /dist/
+  - source: /
     destination: /var/www/html/
-
-hooks:
-  AfterInstall:
-    - location: scripts/install_dependencies.sh
-      runas: root
-  ApplicationStart:
-    - location: scripts/start_application.sh
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_application.sh
-      runas: root
