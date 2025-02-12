@@ -4,8 +4,8 @@ phases:
   install:
     commands:
       - echo "Installing dependencies"
-      - apt-get update -y            # Optional: Update package manager if needed
-      - apt-get install -y git       # Ensure Git is installed (only needed if not pre-installed)
+      - sudo apt-get update -y            
+      - sudo apt-get install -y git       
       - echo "Authenticating with GitHub"
       - git config --global credential.helper 'store'
       - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
@@ -13,12 +13,12 @@ phases:
   build:
     commands:
       - echo "Cloning repository..."
-      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update to your repo URL
-      - echo "Building the application..."    # Add any custom build commands if needed
-      - mkdir -p dist                         # Ensure the 'dist' directory is created
-      - cp -r * dist/                         # Copy files to 'dist' directory for deployment
-
+      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git 
+      - echo "Building the application..."   
+      - mkdir -p dist                         
+      - cp -r * dist/                        
 artifacts:
   files:
-    - dist/**                                 # Upload the 'dist' directory as build artifacts
+    - dist/**                               
+
 
