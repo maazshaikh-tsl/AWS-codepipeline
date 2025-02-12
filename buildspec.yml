@@ -3,18 +3,17 @@ version: 0.2
 phases:
   install:
     commands:
-      - yum update -y
-      - yum install -y git
       - echo "Authenticating with GitHub"
       - git config --global credential.helper 'store'
-      - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
+      - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials  # Using the new token
 
   build:
     commands:
       - echo "Cloning repository..."
-      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git
+      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update with your repo
+      - cd AWS-codepipeline
       - mkdir -p dist
-      - cp -r * dist/
+      - cp -r . dist/
 
 artifacts:
   files:
