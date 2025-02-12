@@ -3,9 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing dependencies"
-      - sudo apt-get update -y            
-      - sudo apt-get install -y git       
+      - apt-get update -y
+      - apt-get install -y git
       - echo "Authenticating with GitHub"
       - git config --global credential.helper 'store'
       - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
@@ -13,12 +12,10 @@ phases:
   build:
     commands:
       - echo "Cloning repository..."
-      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git 
-      - echo "Building the application..."   
-      - mkdir -p dist                         
-      - cp -r * dist/                        
+      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git
+      - mkdir -p dist
+      - cp -r * dist/
+
 artifacts:
   files:
-    - dist/**                               
-
-
+    - dist/**
