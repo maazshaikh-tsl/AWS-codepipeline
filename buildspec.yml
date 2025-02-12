@@ -15,14 +15,14 @@ phases:
       - echo "Cloning repository..."
       - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update with your actual repo URL
       - echo "Checking if repository was cloned successfully..."
-      - ls -la                           # List all files to see if the repository folder exists
+      - ls -la
+      - mkdir -p dist                           
       - cd AWS-codepipeline              # Navigate to the cloned repo directory
       - echo "Listing files inside the cloned repo..."
       - ls -la                           # Ensure that the repository contains files
-      - mkdir -p dist                    # Create dist directory if not exists
       - chmod -R 755 .                   # Ensure files have readable permissions
       - echo "Copying files to dist directory..."
-      - cp -r . dist/                    # Copy all files to dist/
+      - cp -r . ../dist/                    # Copy all files to dist/
 
 artifacts:
   files:
