@@ -3,8 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - apt-get update -y
-      - apt-get install -y git
+      - yum update -y
+      - yum install -y git
       - echo "Authenticating with GitHub"
       - git config --global credential.helper 'store'
       - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
@@ -19,3 +19,4 @@ phases:
 artifacts:
   files:
     - dist/**
+
