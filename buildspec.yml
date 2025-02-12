@@ -3,19 +3,27 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo "Installing dependencies"
+      - yum update -y
+      - yum install -y git
       - echo "Authenticating with GitHub"
       - git config --global credential.helper 'store'
-      - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials  # Using the new token
+      - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
 
   build:
     commands:
       - echo "Cloning repository..."
-      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update with your repo
-      - cd AWS-codepipeline
-      - mkdir -p dist
-      - cp -r . dist/
+      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update with your actual repo URL
+      - cd AWS-codepipeline                  # Navigate to the cloned repo directory
+      - echo "Listing files in the current directory..."
+      - pwd                                   # Print the working directory
+      - ls -la                                # List all files (including hidden ones)
+      - chmod -R 755 .                        # Ensure files have proper permissions
+      - mkdir -p dist                         # Ensure the 'dist' directory exists
+      - echo "Copying files to dist directory..."
+      - cp -r . dist/                         # Copy all files (including hidden files)
 
 artifacts:
   files:
-    - dist/**
+    - dist/**                                 # Include all files in the 'dist' directory
 
