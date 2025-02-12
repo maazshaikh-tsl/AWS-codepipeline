@@ -2,18 +2,23 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      nodejs: 16
+    commands:
+      - echo "Installing dependencies"
+      - apt-get update -y            # Optional: Update package manager if needed
+      - apt-get install -y git       # Ensure Git is installed (only needed if not pre-installed)
+      - echo "Authenticating with GitHub"
+      - git config --global credential.helper 'store'
+      - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
+
   build:
     commands:
-      - echo "Building the application..."
-      - mkdir -p dist
-      - cp -r * dist/
-  post_build:
-    commands:
-      - echo "Build complete, preparing artifact"
+      - echo "Cloning repository..."
+      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update to your repo URL
+      - echo "Building the application..."    # Add any custom build commands if needed
+      - mkdir -p dist                         # Ensure the 'dist' directory is created
+      - cp -r * dist/                         # Copy files to 'dist' directory for deployment
 
 artifacts:
   files:
-    - '**/*'
-  base-directory: dist
+    - dist/**                                 # Upload the 'dist' directory as build artifacts
+
