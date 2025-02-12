@@ -4,8 +4,8 @@ phases:
   install:
     commands:
       - echo "Installing dependencies"
-      - yum update -y
-      - yum install -y git
+      - yum update -y                    # Update the system
+      - yum install -y git                # Install git
       - echo "Authenticating with GitHub"
       - git config --global credential.helper 'store'
       - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
@@ -14,18 +14,16 @@ phases:
     commands:
       - echo "Cloning repository..."
       - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update with your actual repo URL
-      - cd AWS-codepipeline                  # Navigate to the cloned repo directory
-      - echo "Current working directory:"
-      - pwd                                   # Print current directory to ensure it's correct
-      - echo "Listing files in the directory:"
-      - ls -la                                # List all files, including hidden ones
-      - echo "Checking for dist directory..."
-      - mkdir -p dist                         # Ensure dist directory exists
-      - echo "Ensuring proper permissions..."
-      - chmod -R 755 .                        # Ensure files have readable permissions
+      - echo "Checking if repository was cloned successfully..."
+      - ls -la                           # List all files to see if the repository folder exists
+      - cd AWS-codepipeline              # Navigate to the cloned repo directory
+      - echo "Listing files inside the cloned repo..."
+      - ls -la                           # Ensure that the repository contains files
+      - mkdir -p dist                    # Create dist directory if not exists
+      - chmod -R 755 .                   # Ensure files have readable permissions
       - echo "Copying files to dist directory..."
-      - cp -r . dist/                         # Copy all files to dist/
+      - cp -r . dist/                    # Copy all files to dist/
 
 artifacts:
   files:
-    - dist/**                                 # Include all files in the dist directory
+    - dist/**
