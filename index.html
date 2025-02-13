@@ -3,65 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sample Website</title>
+  <title>Modern Sample Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      background-color: #f0f0f5;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      color: #333;
     }
     header {
       background-color: #4CAF50;
-      padding: 1em;
+      padding: 1.5em;
       color: white;
       text-align: center;
-      font-size: 1.5em;
+      font-size: 2em;
+      font-weight: 700;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 1em 0;
+      background-color: #333;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #4CAF50;
     }
     section {
-      padding: 2em;
+      padding: 3em;
       text-align: center;
-    }
-    footer {
-      background-color: #333;
-      color: white;
-      padding: 1em;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
+      max-width: 800px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 2em;
     }
     button {
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 1em;
+      font-weight: 600;
       color: white;
       background-color: #007BFF;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
     }
     button:hover {
       background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 1.5em;
+      text-align: center;
+      width: 100%;
+      position: relative;
+      bottom: 0;
     }
   </style>
 </head>
 <body>
   <header>
-    Welcome to the Sample Website
+    Welcome to the Modern Sample Website
   </header>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
   <section>
-    <h1>Hello, World!</h1>
-    <p>This is a simple web page for testing purposes.</p>
-    <button onclick="alert('Button clicked!')">Click Me</button>
+    <h1>Hello, Modern World!</h1>
+    <p>This is a modern and attractive web page for testing purposes. Explore the navigation and interact with the button below!</p>
+    <button onclick="alert('Thank you for visiting!')">Click Me</button>
   </section>
   <footer>
-    &copy; 2025 Sample Website. All rights reserved.
+    &copy; 2025 Modern Sample Website. All rights reserved.
   </footer>
 </body>
 </html>
-
