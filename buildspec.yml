@@ -2,8 +2,12 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      python: latest
     commands:
       - echo "Installing dependencies"
+
+      # Check package manager and install required dependencies
       - |
         if [ -f /etc/debian_version ]; then 
           export PKG_MANAGER="apt-get"; 
@@ -14,23 +18,30 @@ phases:
       - sudo $PKG_MANAGER update -y
       - sudo $PKG_MANAGER install -y git
 
+      # GitHub authentication
       - echo "Authenticating with GitHub"
       - git config --global credential.helper 'store'
       - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
 
   build:
     commands:
-      - echo "Cloning repository..."
+      - echo "Starting build process..."
       - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update with your actual repo URL
       - echo "Checking if repository was cloned successfully..."
       - ls -la
+
+      - echo "Setting up distribution folder..."
       - mkdir -p dist                           
-      - cd AWS-codepipeline              # Navigate to the cloned repo directory
-      - echo "Listing files inside the cloned repo..."
-      - ls -la                           # Ensure that the repository contains files
-      - chmod -R 755 .                   # Ensure files have readable permissions
+      - cd AWS-codepipeline  # Navigate to the cloned repo directory
+      - ls -la  # Ensure that the repository contains files
+
+      - chmod -R 755 .  # Ensure files have readable permissions
       - echo "Copying files to dist directory..."
-      - cp -r . ../dist/                    # Copy all files to dist/
+      - cp -r . ../dist/  # Copy all files to dist/
+
+  post_build:
+    commands:
+      - echo "Build completed successfully!"
 
 artifacts:
   files:
