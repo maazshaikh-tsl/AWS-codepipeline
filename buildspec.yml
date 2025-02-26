@@ -6,19 +6,15 @@ phases:
       - echo "Installing dependencies"
       - sudo apt-get update -y || sudo yum update -y
       - sudo apt-get install -y git || sudo yum install -y git
-      - echo "Authenticating with GitHub"
-      - git config --global credential.helper 'store'
-      - echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
 
   build:
     commands:
       - echo "Starting build process..."
-      - git clone https://github.com/maazshaikh-tsl/AWS-codepipeline.git  # Update with your actual repo URL
       - echo "Checking if repository was cloned successfully..."
       - ls -la
       - echo "Copying files to dist directory..."
       - mkdir -p dist
-      - cp -r AWS-codepipeline/* dist/
+      - cp -r * dist/
 
 artifacts:
   files:
