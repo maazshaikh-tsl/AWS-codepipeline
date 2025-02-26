@@ -1,5 +1,17 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: dist/
     destination: /var/www/html/
+
+permissions:
+  - object: /var/www/html/
+    owner: apache
+    group: apache
+    mode: 755
+
+hooks:
+  AfterInstall:
+    - location: scripts/restart_apache.sh
+      timeout: 60
+      runas: root
