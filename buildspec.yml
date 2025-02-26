@@ -7,6 +7,10 @@ phases:
       - sudo apt-get update -y || sudo yum update -y
       - sudo apt-get install -y git || sudo yum install -y git
 
+  pre_build:
+    commands:
+      - echo "Pre-build phase completed."
+
   build:
     commands:
       - echo "Starting build process..."
@@ -14,7 +18,11 @@ phases:
       - ls -la
       - echo "Copying files to dist directory..."
       - mkdir -p dist
-      - cp -r * dist/
+      - rsync -av --exclude='dist' ./ dist/
+
+  post_build:
+    commands:
+      - echo "Build completed successfully."
 
 artifacts:
   files:
