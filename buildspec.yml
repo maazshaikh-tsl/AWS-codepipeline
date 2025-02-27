@@ -16,6 +16,8 @@ phases:
       - echo "Starting build process..."
       - echo "Checking if repository was cloned successfully..."
       - ls -la
+      - echo "Ensuring scripts directory exists..."
+      - mkdir -p scripts
       - echo "Copying files to dist directory..."
       - mkdir -p dist
       - rsync -av --exclude='dist' ./ dist/
@@ -26,4 +28,4 @@ phases:
 
 artifacts:
   files:
-    - dist/**
+    - '**/*'  # Ensures all files, including scripts, are included
