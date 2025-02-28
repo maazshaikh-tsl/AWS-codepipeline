@@ -3,27 +3,31 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Cleaning DNF metadata..."
-      - sudo dnf clean all  # Clean expired metadata
-      - sudo dnf makecache  # Rebuild cache
+      - echo "Installing dependencies..."
+      - sudo dnf clean all
       - sudo dnf update -y
-      - sudo dnf install -y git
+      - sudo dnf install -y git unzip
 
   pre_build:
     commands:
+      - echo "Pre-build phase: Checking directory structure"
+      - ls -la
       - echo "Pre-build phase completed."
 
   build:
     commands:
       - echo "Starting build process..."
-      - ls -la
-      - mkdir -p scripts dist
+      - mkdir -p dist
       - rsync -av --exclude='dist' ./ dist/
+      - echo "Build phase completed."
 
   post_build:
     commands:
+      - echo "Post-build phase: Ensuring correct file permissions"
+      - sudo chown -R apache:apache dist/
+      - sudo chmod -R 755 dist/
       - echo "Build completed successfully."
 
 artifacts:
   files:
-    - '**/*'  
+    - '**/*'  # Ensures all files, including scripts, are included
