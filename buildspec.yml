@@ -3,9 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing dependencies"
-      - sudo apt-get update -y || sudo yum update -y
-      - sudo apt-get install -y git || sudo yum install -y git
+      - echo "Installing dependencies..."
+      - sudo dnf update -y && sudo dnf install -y git
 
   pre_build:
     commands:
@@ -20,7 +19,7 @@ phases:
       - mkdir -p scripts
       - echo "Copying files to dist directory..."
       - mkdir -p dist
-      - rsync -av --exclude='dist' ./ dist/
+      - cp -r * dist/  # Copy everything to dist except hidden files
 
   post_build:
     commands:
