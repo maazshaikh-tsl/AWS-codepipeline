@@ -3,8 +3,11 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing dependencies..."
-      - sudo dnf update -y && sudo dnf install -y git
+      - echo "Cleaning DNF metadata..."
+      - sudo dnf clean all  # Clean expired metadata
+      - sudo dnf makecache  # Rebuild cache
+      - sudo dnf update -y
+      - sudo dnf install -y git
 
   pre_build:
     commands:
@@ -13,13 +16,9 @@ phases:
   build:
     commands:
       - echo "Starting build process..."
-      - echo "Checking if repository was cloned successfully..."
       - ls -la
-      - echo "Ensuring scripts directory exists..."
-      - mkdir -p scripts
-      - echo "Copying files to dist directory..."
-      - mkdir -p dist
-      - cp -r * dist/  # Copy everything to dist except hidden files
+      - mkdir -p scripts dist
+      - rsync -av --exclude='dist' ./ dist/
 
   post_build:
     commands:
@@ -27,4 +26,4 @@ phases:
 
 artifacts:
   files:
-    - '**/*'  # Ensures all files, including scripts, are included
+    - '**/*'  
