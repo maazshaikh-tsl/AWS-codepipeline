@@ -6,7 +6,7 @@ phases:
       - echo "Installing dependencies..."
       - sudo dnf clean all
       - sudo dnf update -y
-      - sudo dnf install -y git unzip
+      - sudo dnf install -y git unzip rsync  # Added rsync explicitly
 
   pre_build:
     commands:
@@ -18,13 +18,13 @@ phases:
     commands:
       - echo "Starting build process..."
       - mkdir -p dist
-      - rsync -av --exclude='dist' ./ dist/
+      - cp -r * dist/  # Properly copying files instead of using rsync
       - echo "Build phase completed."
 
   post_build:
     commands:
       - echo "Post-build phase: Ensuring correct file permissions"
-      - sudo chown -R apache:apache dist/
+      - sudo chown -R nginx:nginx dist/  # Changed from apache to nginx
       - sudo chmod -R 755 dist/
       - echo "Build completed successfully."
 
