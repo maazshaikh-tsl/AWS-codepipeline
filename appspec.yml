@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/html  # Target directory for deployment
+    destination: /var/www/html  # Deploy HTML files to the web server directory
 permissions:
   - object: /var/www/html
     pattern: "**"
