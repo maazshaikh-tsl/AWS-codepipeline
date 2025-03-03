@@ -3,15 +3,16 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "No dependencies to install for HTML files."
+      - echo "No dependencies required for HTML files."
   build:
     commands:
-      - echo "Zipping files for deployment..."
+      - echo "Zipping application files..."
       - zip -r application.zip *  # Creates a ZIP of all files
   post_build:
     commands:
+      - echo "Uploading application.zip to S3..."
+      - aws s3 cp application.zip s3://tsl-lambda-deployment-bucket/
       - echo "Build completed successfully."
-      - ls -lah application.zip
 artifacts:
   files:
     - application.zip
