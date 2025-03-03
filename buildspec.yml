@@ -3,31 +3,16 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing dependencies..."
-      - sudo dnf clean all
-      - sudo dnf update -y
-      - sudo dnf install -y git unzip rsync
-
-  pre_build:
-    commands:
-      - echo "Pre-build phase: Checking directory structure"
-      - ls -la
-      - echo "Pre-build phase completed."
-
+      - echo "No dependencies to install for HTML files."
   build:
     commands:
-      - echo "Starting build process..."
-      - mkdir -p dist
-      - cp -r . dist/
-      - echo "Build phase completed."
-
+      - echo "Zipping files for deployment..."
+      - zip -r application.zip *  # Creates a ZIP of all files
   post_build:
     commands:
-      - echo "Post-build phase: Ensuring correct file permissions"
-      - sudo chown -R nginx:nginx dist/
-      - sudo chmod -R 755 dist/
       - echo "Build completed successfully."
-
+      - ls -lah application.zip
 artifacts:
   files:
-    - "**/*"
+    - application.zip
+  discard-paths: yes
