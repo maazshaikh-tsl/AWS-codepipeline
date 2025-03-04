@@ -1,31 +1,37 @@
 version: 0.0
 os: linux
-
 files:
   - source: /
-    destination: /usr/share/nginx/html
-
+    destination: /usr/share/nginx/html  # Nginx default web root
 permissions:
   - object: /usr/share/nginx/html
     pattern: "**"
     owner: nginx
     group: nginx
     mode: 755
-
 hooks:
   BeforeInstall:
-    - location: scripts/before_install.sh
-      timeout: 300
-      runas: root
+    - runas: root
+      command: |
+        echo "Updating system packages..."
+        yum update -y
+        echo "Installing Nginx..."
+        amazon-linux-extras enable nginx1
+        yum install -y nginx
+        systemctl enable nginx
   AfterInstall:
-    - location: scripts/after_install.sh
-      timeout: 300
-      runas: root
+    - runas: root
+      command: |
+        echo "Setting correct permissions..."
+        chown -R nginx:nginx /usr/share/nginx/html
+        chmod -R 755 /usr/share/nginx/html
   ApplicationStart:
-    - location: scripts/start_server.sh
-      timeout: 300
-      runas: root
+    - runas: root
+      command: |
+        echo "Starting Nginx service..."
+        systemctl restart nginx
   ValidateService:
-    - location: scripts/validate_service.sh
-      timeout: 300
-      runas: root
+    - runas: root
+      command: |
+        echo "Validating Nginx service..."
+        systemctl status nginx || exit 1
