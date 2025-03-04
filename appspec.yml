@@ -1,14 +1,17 @@
 version: 0.0
 os: linux
+
 files:
   - source: /
-    destination: /usr/share/nginx/html  # Nginx default web root
+    destination: /usr/share/nginx/html
+
 permissions:
   - object: /usr/share/nginx/html
     pattern: "**"
     owner: nginx
     group: nginx
     mode: 755
+
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
