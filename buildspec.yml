@@ -10,8 +10,10 @@ phases:
       - echo "Listing files before zipping..."
       - ls -R   # Show all files in the working directory
       - pwd     # Print current working directory
+      - echo "Ensuring correct permissions..."
+      - chmod +x appspec.yml scripts/*.sh  # Ensure scripts are executable
       - echo "Zipping application files..."
-      - zip -r application.zip appspec.yml scripts/  # Ensure correct paths
+      - zip -r application.zip appspec.yml scripts/ index.html  # Explicitly list files
       - ls -lh application.zip  # Check if the zip file is created
 
   post_build:
