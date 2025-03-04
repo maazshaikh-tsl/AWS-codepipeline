@@ -4,14 +4,16 @@ phases:
   install:
     commands:
       - echo "No dependencies required for HTML files."
+
   build:
     commands:
       - echo "Zipping application files..."
-      - zip -r application.zip appspec.yml scripts/ *  # Explicitly add appspec.yml and scripts/
+      - zip -r application.zip appspec.yml scripts index.html  # Include only required files
+
   post_build:
     commands:
       - echo "Uploading application.zip to S3..."
-      - aws s3 cp application.zip s3://tsl-lambda-deployment-bucket/
+      - aws s3 cp application.zip s3://tsl-lambda-deployment-bucket/ --region us-east-1
       - echo "Build completed successfully."
 
 artifacts:
