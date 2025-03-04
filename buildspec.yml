@@ -7,13 +7,14 @@ phases:
   build:
     commands:
       - echo "Zipping application files..."
-      - zip -r application.zip *  # Creates a ZIP of all files
+      - zip -r application.zip appspec.yml scripts/ *  # Explicitly add appspec.yml and scripts/
   post_build:
     commands:
       - echo "Uploading application.zip to S3..."
       - aws s3 cp application.zip s3://tsl-lambda-deployment-bucket/
       - echo "Build completed successfully."
+
 artifacts:
   files:
     - application.zip
-  discard-paths: yes
+  discard-paths: no  # Keep directory structure intact
