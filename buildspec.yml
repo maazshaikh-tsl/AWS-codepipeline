@@ -1,14 +1,16 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      python: latest
   build:
     commands:
-      - zip -r application.zip . -x "*.git*"
-
+      - echo "Build phase: No build needed for static files."
   post_build:
     commands:
-      - aws s3 cp application.zip s3://tsl-bucket-2025/
+      - echo "Build completed successfully."
 
 artifacts:
   files:
-    - application.zip
+    - '**'  # Store everything in the repo
