@@ -7,7 +7,7 @@ phases:
 
   post_build:
     commands:
-      - aws s3 cp application.zip s3://tsl-lambda-deployment-bucket/
+      - aws s3 cp application.zip s3://tsl-bucket-2025/
 
 artifacts:
   files:
