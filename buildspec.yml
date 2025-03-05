@@ -2,15 +2,9 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      python: latest
-  build:
     commands:
-      - echo "Build phase: No build needed for static files."
-  post_build:
-    commands:
-      - echo "Build completed successfully."
+      - echo "No build step required for static files"
 
 artifacts:
   files:
-    - '**'  # Store everything in the repo
+    - '**/*'  # Store all files in the repository as artifacts
